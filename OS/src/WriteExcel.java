@@ -31,6 +31,7 @@ public class WriteExcel {
 
 		String inputFile = "";
 		String outputFile = "";
+		WriteExcel newFile = new WriteExcel();
 		if (args.length == 0 || args.length == 1) {
 			System.out
 					.print("Missing an input file or an output file, or both.");
@@ -58,18 +59,18 @@ public class WriteExcel {
 		}
 
 		try {
-			putIntoString(inputFile);
+			newFile.putIntoString(inputFile);
 
-			startEntry();
+			newFile.startEntry();
 
 		} catch (IndexOutOfBoundsException e) {
-			writeToSpreadSheet(outputFile);
+			newFile.writeToSpreadSheet(outputFile);
 			System.out.println("done");
 		}
 
 	}
 
-	private static void writeToSpreadSheet(String outputFile)
+	private void writeToSpreadSheet(String outputFile)
 			throws IOException, RowsExceededException, WriteException {
 		WritableWorkbook workbook = Workbook
 				.createWorkbook(new File(outputFile));
@@ -226,7 +227,7 @@ public class WriteExcel {
 
 	}
 
-	private static void startEntry() {
+	public void startEntry() {
 		String idTemp = "";
 
 		int idLocation;
@@ -392,7 +393,7 @@ public class WriteExcel {
 		}
 	}
 
-	private static void putIntoString(String inputFile)
+	public void putIntoString(String inputFile)
 			throws FileNotFoundException {
 		File input = new File(inputFile);
 		Scanner scan = new Scanner(input);
