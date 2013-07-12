@@ -28,22 +28,51 @@ public class WriteExcel {
 	// comment
 	// comment
 	public static void main(String[] args) throws WriteException, IOException {
+
+		String inputFile = "";
+		String outputFile = "";
+		if (args.length == 0 || args.length == 1) {
+			System.out
+					.print("Missing an input file or an output file, or both.");
+			System.exit(0);
+
+		} else {
+			for (int i = 0; i < args.length; i++) {
+				try {
+
+					if (i == 0) {
+						inputFile = args[i];
+					}
+
+					else {
+
+						outputFile = args[i];
+					}
+
+				} catch (NumberFormatException e) {
+					System.out.print("Need an input file");
+				}
+
+			}
+
+		}
+
 		try {
-			putIntoString();
+			putIntoString(inputFile);
 
 			startEntry();
 
 		} catch (IndexOutOfBoundsException e) {
-			writeToSpreadSheet();
+			writeToSpreadSheet(outputFile);
 			System.out.println("done");
 		}
 
 	}
 
-	private static void writeToSpreadSheet() throws IOException,
-			RowsExceededException, WriteException {
+	private static void writeToSpreadSheet(String outputFile)
+			throws IOException, RowsExceededException, WriteException {
 		WritableWorkbook workbook = Workbook
-				.createWorkbook(new File("lol2.xls"));
+				.createWorkbook(new File(outputFile));
 		WritableSheet sheet = workbook.createSheet("First Sheet", 0);
 		Label label = new Label(0, 0, "Object Id");
 		Label label2 = new Label(1, 0, "Question Content");
@@ -363,8 +392,9 @@ public class WriteExcel {
 		}
 	}
 
-	private static void putIntoString() throws FileNotFoundException {
-		File input = new File("openstudy.txt");
+	private static void putIntoString(String inputFile)
+			throws FileNotFoundException {
+		File input = new File(inputFile);
 		Scanner scan = new Scanner(input);
 
 		while (scan.hasNext()) {
