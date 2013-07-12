@@ -25,8 +25,8 @@ public class WriteExcel {
 	private static ArrayList<String> replyContent = new ArrayList<String>();
 	private static ArrayList<Integer> numberOfReplies = new ArrayList<Integer>();
 
-	//comment
-	//comment
+	// comment
+	// comment
 	public static void main(String[] args) throws WriteException, IOException {
 		try {
 			putIntoString();
@@ -37,7 +37,6 @@ public class WriteExcel {
 			writeToSpreadSheet();
 			System.out.println("done");
 		}
-
 
 	}
 
@@ -89,7 +88,6 @@ public class WriteExcel {
 			Label user = new Label(2, rowCounter, allTheAskers.get(idCounter));
 			sheet.addCell(user);
 
-
 			Label numberOfMedals = new Label(3, rowCounter, medalCount.get(
 					idCounter).toString());
 			sheet.addCell(numberOfMedals);
@@ -114,7 +112,6 @@ public class WriteExcel {
 
 				}
 
-
 				for (int l = 0; l < medalLength; l++) {
 					Label medalTo = new Label(5, medalToRowCounter,
 							medalsTo.get(medalToIndex));
@@ -136,9 +133,9 @@ public class WriteExcel {
 					replyFromIndex++;
 
 				}
-				//dsa
-				//dsa
-				if (copyOfReplyFromIndex == replyFromIndex -1) {
+				// dsa
+				// dsa
+				if (copyOfReplyFromIndex == replyFromIndex - 1) {
 					;
 				} else {
 
@@ -183,7 +180,6 @@ public class WriteExcel {
 
 			else {
 
-
 				rowCounter += numberOfReplies.get(idCounter);
 				medalRowCounter = rowCounter;
 				medalToRowCounter = rowCounter;
@@ -207,7 +203,6 @@ public class WriteExcel {
 		int idLocation;
 
 		while (theFile.indexOf("\"_id\"") > 0) {
-		
 
 			idLocation = theFile.indexOf("\"_id\"") + 18;
 
@@ -350,22 +345,20 @@ public class WriteExcel {
 				System.out.println(idTemp.toString());
 				replyContent.add(idTemp);
 				theFile = theFile.delete(0, locationOfReplyEnd + 2);
-		
+
 				try {
 					doneWithReplies = theFile.substring(156, 325);
 				} catch (IndexOutOfBoundsException e) {
 
 					numberOfReplies.add(replyCount + 1);
 				}
-	
+
 				theFile = theFile.delete(0, theFile.indexOf("{\n"));
 				replyCount++;
 
 			}
 
 			numberOfReplies.add(replyCount);
-
-
 
 		}
 	}
