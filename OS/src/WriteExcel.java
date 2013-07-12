@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import jxl.Workbook;
 import jxl.write.Label;
+import jxl.write.WritableCellFormat;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
@@ -75,6 +76,8 @@ public class WriteExcel {
 		WritableWorkbook workbook = Workbook
 				.createWorkbook(new File(outputFile));
 		WritableSheet sheet = workbook.createSheet("First Sheet", 0);
+		WritableCellFormat cell = new WritableCellFormat();
+		cell.setShrinkToFit(true);
 		Label label = new Label(0, 0, "Object Id");
 		Label label2 = new Label(1, 0, "Question Content");
 		Label label3 = new Label(2, 0, "User");
@@ -176,7 +179,7 @@ public class WriteExcel {
 				for (int n = 0; n <= replyLength; n++) {
 
 					Label theReply = new Label(7, replyContentRowCounter,
-							replyContent.get(replyContentIndex));
+							replyContent.get(replyContentIndex), cell);
 					sheet.addCell(theReply);
 					replyContentRowCounter++;
 					replyContentIndex++;
